@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <!-- ── Favicons & PWA ─────────────────────────────────────────────────── -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Mobile-first viewport: prevents zoom on input focus, critical for gesture camera UX -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- ── Android / Chrome ──────────────────────────────────────────────── -->
+    <meta name="theme-color" content="#f97316" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+    <!-- ── iOS PWA / Safari ──────────────────────────────────────────────── -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="SignConnect" />
+
+    <!-- ── SEO ────────────────────────────────────────────────────────────── -->
+    <title>SignConnect – ISL Translator</title>
+    <meta name="description" content="SignConnect – Real-time Indian Sign Language translation powered by AI. Works on Android and iOS." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://signconnect.vercel.app/" />
+
+    <!-- ── Open Graph (share previews) ──────────────────────────────────── -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="SignConnect – ISL Translator" />
+    <meta property="og:description" content="Real-time Indian Sign Language translation powered by AI." />
+    <meta property="og:url" content="https://signconnect.vercel.app/" />
+
+    <!-- ── Performance: preconnect to external origins ───────────────────── -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://storage.googleapis.com" crossorigin />
+    <link rel="dns-prefetch" href="https://api.dicebear.com" />
+
+    <!-- ── Google Identity Services (required for Google Sign-In popup) ─── -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+  </head>
+  <body>
+    <noscript>
+      <div style="padding:2rem;text-align:center;font-family:sans-serif">
+        SignConnect requires JavaScript to run. Please enable it in your browser.
+      </div>
+    </noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

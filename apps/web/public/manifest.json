@@ -1,0 +1,40 @@
+{
+  "name": "SignConnect – ISL Translator",
+  "short_name": "SignConnect",
+  "description": "Real-time Indian Sign Language translation powered by AI",
+  "start_url": "/app",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#ffffff",
+  "theme_color": "#f97316",
+  "categories": ["accessibility", "education", "health"],
+  "lang": "en-IN",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "share_target": {
+    "action": "/app",
+    "method": "GET",
+    "params": { "title": "title", "url": "url" }
+  },
+  "related_applications": [],
+  "prefer_related_applications": false
+}

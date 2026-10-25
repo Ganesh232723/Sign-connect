@@ -1,0 +1,57 @@
+services:
+  # ── SignConnect API Gateway (FastAPI) ────────────────────────────────────────
+  - type: web
+    name: signconnect-api
+    runtime: python
+    plan: free                    # upgrade to starter ($7/mo) for no sleep + more RAM
+    region: singapore             # closest to India — change to ohio/oregon if needed
+
+    rootDir: apps/api-gateway
+    buildCommand: pip install -r requirements.txt
+    startCommand: >
+      uvicorn main:app
+      --host 0.0.0.0
+      --port $PORT
+      --workers 1
+      --loop uvloop
+      --http h11
+      --ws websockets
+      --log-level info
+      --access-log
+
+    # ── Health check ────────────────────────────────────────────────────────
+    healthCheckPath: /health
+
+    # ── Auto-deploy on push to main ─────────────────────────────────────────
+    autoDeploy: true
+
+    # ── Environment variables ────────────────────────────────────────────────
+    # IMPORTANT: Set these in the Render dashboard → Environment tab
+    # Do NOT store secrets in this file
+    envVars:
+      # Supabase — set manually in Render dashboard
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_ANON_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+
+      # Security — auto-generated random value by Render
+      - key: SECRET_KEY
+        generateValue: true
+
+      # CORS — update to your Vercel domain after first deploy
+      # Example: https://signconnect.vercel.app,https://signconnect.app
+      - key: ALLOWED_ORIGINS
+        value: "https://signconnect.vercel.app"
+
+      # Feature flags
+      - key: DUMMY_MODE
+        value: "true"             # Set to false when real ONNX model is ready
+
+      # Python optimization
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: PYTHONDONTWRITEBYTECODE
+        value: "1"

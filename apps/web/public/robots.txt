@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Allow: /app
+Disallow: /app/admin
+Disallow: /app/settings
+
+Sitemap: https://signconnect.vercel.app/sitemap.xml
