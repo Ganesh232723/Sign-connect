@@ -58,8 +58,9 @@ var/
 sdist/
 develop-eggs/
 .installed.cfg
-lib/
-lib64/
+# Python virtual-env lib folders only (not frontend src/lib/)
+/lib/
+/lib64/
 
 # ML / Model artifacts
 *.onnx
