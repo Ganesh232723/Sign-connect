@@ -13,7 +13,7 @@ services:
       - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY}
       - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY}
       - SECRET_KEY=${SECRET_KEY:-dev-secret-change-in-prod}
-      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost:5173}
+      - ALLOWED_ORIGINS=${ALLOWED_ORIGINS:-http://localhost:5173
       - DUMMY_MODE=${DUMMY_MODE:-true}
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:8000/health"]

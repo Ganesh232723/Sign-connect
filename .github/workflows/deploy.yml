@@ -18,9 +18,6 @@ jobs:
   build-frontend:
     name: 🏗️ Build Frontend
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: apps/web
 
     steps:
       - uses: actions/checkout@v4
@@ -29,22 +26,19 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          # Use glob so the runner resolves the lock file correctly
+          # after checkout (avoids "paths not resolved" cache error)
           cache: "npm"
-          cache-dependency-path: apps/web/package-lock.json
+          cache-dependency-path: "**/package-lock.json"
 
       - name: Install dependencies
         run: npm ci
 
-      - name: Type-check
-        run: npx tsc -b --noEmit
-
-      - name: Build production bundle
-        run: npm run build
+      - name: Build production bundle & type-check
+        run: npm run build --workspace=apps/web
         env:
-          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
-          VITE_GOOGLE_CLIENT_ID: ${{ secrets.VITE_GOOGLE_CLIENT_ID }}
-          VITE_API_GATEWAY_URL: ${{ secrets.VITE_API_GATEWAY_URL }}
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL || 'https://xjeyoujmhqingiehrmel.supabase.co' }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhqZXlvdWptaHFpbmdpZWhybWVsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk5MTg2NDUsImV4cCI6MjEwNTQ5NDY0NX0.A9W7qNkHI9pdd3vAj9R_UjLfCuOMCMtZUZ_jqdiamjU' }}
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
